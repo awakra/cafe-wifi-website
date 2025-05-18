@@ -1,0 +1,32 @@
+.header-bg {
+  background-image: url("/static/img/coffee-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-overlay {
+  background: rgba(0, 0, 0, 0.5); /* dark overlay for readability */
+  padding: 2rem;
+  border-radius: 12px;
+  width: 100%;
+}
+
+/* Navbar brand enhancements */
+.navbar-brand span {
+  letter-spacing: 1px;
+  transition: color 0.2s;
+}
+.navbar-brand span:hover {
+  color: #ffb347;
+}
+
+/* Card image styling for consistency */
+.card-img-top {
+  object-fit: cover;
+  height: 200px;
+}

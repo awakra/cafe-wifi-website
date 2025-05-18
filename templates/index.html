@@ -1,0 +1,59 @@
+{% extends "base.html" %} {% block title %}All Cafes{% endblock %} {% block
+content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2 class="mb-0">All Cafes</h2>
+</div>
+
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+  {% for cafe in cafes %}
+  <div class="col">
+    <div class="card h-100 shadow-sm">
+      <img
+        src="{{ cafe.img_url }}"
+        class="card-img-top"
+        alt="{{ cafe.name }}"
+        style="object-fit: cover; height: 200px"
+        loading="lazy"
+      />
+      <div class="card-body">
+        <h5 class="card-title">{{ cafe.name }}</h5>
+        <p class="card-text mb-1">
+          <strong>Location:</strong> {{ cafe.location }}
+        </p>
+        <p class="card-text mb-1">
+          <strong>Seats:</strong> {{ cafe.seats or 'N/A' }}
+        </p>
+        <p class="card-text mb-1">
+          <strong>Coffee Price:</strong> {{ cafe.coffee_price or 'N/A' }}
+        </p>
+        <div class="mb-2">
+          <span class="badge bg-success">
+            {{ 'Wi-Fi' if cafe.has_wifi else 'No Wi-Fi' }}
+          </span>
+          <span class="badge bg-info text-dark">
+            {{ 'Sockets' if cafe.has_sockets else 'No Sockets' }}
+          </span>
+          <span class="badge bg-warning text-dark">
+            {{ 'Toilet' if cafe.has_toilet else 'No Toilet' }}
+          </span>
+          <span class="badge bg-secondary">
+            {{ 'Calls OK' if cafe.can_take_calls else 'No Calls' }}
+          </span>
+        </div>
+        <a
+          href="{{ cafe.map_url }}"
+          class="btn btn-outline-primary btn-sm"
+          target="_blank"
+          rel="noopener"
+          >View on Map</a
+        >
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="col">
+    <div class="alert alert-info">No cafes found.</div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

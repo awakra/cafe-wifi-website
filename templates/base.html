@@ -24,7 +24,7 @@
       href="{{ url_for('static', filename='css/styles.css') }}"
     />
   </head>
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <!-- Header -->
     <header class="header-bg text-white text-center py-4">
       <div class="header-overlay">
@@ -77,6 +77,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('add_cafe') }}">Add Cafe</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('signup') }}">Signup</a>
             </li>
           </ul>
         </div>

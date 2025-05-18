@@ -5,7 +5,7 @@ from forms import RegisterForm
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cafes.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'your-secret-key'  # Replace with a strong secret key!
+app.config['SECRET_KEY'] = 'your-secret-key'  
 db.init_app(app)
 
 @app.route('/')
@@ -34,7 +34,7 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
         flash("Account created! Please log in.", "success")
-        return redirect(url_for('home'))  # Or redirect to a login page if you have one
+        return redirect(url_for('home'))  
     return render_template('signup.html', form=form)
 
 if __name__ == '__main__':

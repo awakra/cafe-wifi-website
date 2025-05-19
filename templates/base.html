@@ -79,7 +79,39 @@
                 >Home</a
               >
             </li>
-            {% if session.get('user_id') %}
+
+            {% if session.get('user_id') %} {# User is logged in #} {% if
+            session.get('is_admin') %} {# User is admin #}
+            <li class="nav-item">
+              <a
+                class="nav-link btn btn-info text-white ms-2 px-3"
+                href="{{ url_for('admin_dashboard') }}"
+                >Admin Dashboard</a
+              >
+            </li>
+            {% else %} {# User is logged in but not admin #}
+            <li class="nav-item">
+              <a
+                class="nav-link btn btn-orange text-white ms-2 px-3"
+                href="{{ url_for('suggest_cafe') }}"
+                >Suggest a Cafe</a
+              >
+            </li>
+            {# User Dashboard link here #}
+            <li class="nav-item">
+              <a
+                class="nav-link btn btn-orange text-white ms-2 px-3"
+                {#
+                Using
+                btn-secondary
+                for
+                distinction
+                #}
+                href="{{ url_for('user_dashboard') }}"
+                >My Suggestions</a
+              >
+            </li>
+            {% endif %} {# Logout link for all logged-in users #}
             <li class="nav-item">
               <a
                 class="nav-link btn btn-orange text-white ms-2 px-3"
@@ -87,7 +119,7 @@
                 >Logout</a
               >
             </li>
-            {% else %}
+            {% else %} {# User is not logged in #}
             <li class="nav-item">
               <a
                 class="nav-link btn btn-orange text-white ms-2 px-3"
@@ -95,7 +127,6 @@
                 >Login</a
               >
             </li>
-            {% endif %}
             <li class="nav-item">
               <a
                 class="nav-link btn btn-orange text-white ms-2 px-3"
@@ -103,24 +134,32 @@
                 >Sign Up</a
               >
             </li>
+            {% endif %}
           </ul>
         </div>
       </div>
     </nav>
 
     <!-- Flash Messages -->
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <div class="container mt-3">
-          {% for category, message in messages %}
-            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
-              {{ message }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-          {% endfor %}
-        </div>
-      {% endif %}
-    {% endwith %}
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <div class="container mt-3">
+      {% for category, message in messages %}
+      <div
+        class="alert alert-{{ category }} alert-dismissible fade show"
+        role="alert"
+      >
+        {{ message }}
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
 
     <!-- Main Content -->
     <main class="container my-5">{% block content %}{% endblock %}</main>

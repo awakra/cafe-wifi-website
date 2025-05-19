@@ -1,0 +1,106 @@
+{% extends "base.html" %} {% block title %}{% if is_editing %}Edit Cafe{% else
+%}Add New Cafe{% endif %}{% endblock %} {% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">
+    {% if is_editing %}Edit Cafe{% else %}Add New Cafe{% endif %}
+  </h2>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <form method="POST" action="">
+            {{ form.csrf_token }}
+
+            <div class="mb-3">
+              {{ form.name.label(class="form-label") }} {{
+              form.name(class="form-control") }} {% for error in
+              form.name.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class="mb-3">
+              {{ form.map_url.label(class="form-label") }} {{
+              form.map_url(class="form-control") }} {% for error in
+              form.map_url.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class="mb-3">
+              {{ form.img_url.label(class="form-label") }} {{
+              form.img_url(class="form-control") }} {% for error in
+              form.img_url.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class="mb-3">
+              {{ form.location.label(class="form-label") }} {{
+              form.location(class="form-control") }} {% for error in
+              form.location.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class="mb-3 form-check">
+              {{ form.has_sockets(class="form-check-input") }} {{
+              form.has_sockets.label(class="form-check-label") }} {% for error
+              in form.has_sockets.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class="mb-3 form-check">
+              {{ form.has_toilet(class="form-check-input") }} {{
+              form.has_toilet.label(class="form-check-label") }} {% for error in
+              form.has_toilet.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class="mb-3 form-check">
+              {{ form.has_wifi(class="form-check-input") }} {{
+              form.has_wifi.label(class="form-check-label") }} {% for error in
+              form.has_wifi.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class="mb-3 form-check">
+              {{ form.can_take_calls(class="form-check-input") }} {{
+              form.can_take_calls.label(class="form-check-label") }} {% for
+              error in form.can_take_calls.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class="mb-3">
+              {{ form.seats.label(class="form-label") }} {{
+              form.seats(class="form-control") }} {% for error in
+              form.seats.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <div class="mb-3">
+              {{ form.coffee_price.label(class="form-label") }} {{
+              form.coffee_price(class="form-control") }} {% for error in
+              form.coffee_price.errors %}
+              <span class="text-danger">{{ error }}</span>
+              {% endfor %}
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              {% if is_editing %}Update Cafe{% else %}Add Cafe{% endif %}
+            </button>
+            <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary"
+              >Cancel</a
+            >
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

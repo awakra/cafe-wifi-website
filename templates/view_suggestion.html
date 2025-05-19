@@ -1,0 +1,84 @@
+{% extends "base.html" %} {% block title %}Suggestion Details - {{
+suggestion.name }}{% endblock %} {% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">Suggestion Details: {{ suggestion.name }}</h2>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">{{ suggestion.name }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{ suggestion.location }}</h6>
+
+      <p class="card-text">
+        <strong>Suggested By:</strong> {{ suggestion.user_suggester.name if
+        suggestion.user_suggester else 'Anonymous' }}<br />
+        <strong>Status:</strong>
+        <span
+          class="badge bg-{{ 'success' if suggestion.status == 'approved' else ('danger' if suggestion.status == 'rejected' else 'warning') }}"
+        >
+          {{ suggestion.status|capitalize }} </span
+        ><br />
+        <strong>Sockets:</strong> {% if suggestion.has_sockets %}Yes{% else
+        %}No{% endif %}<br />
+        <strong>Toilet:</strong> {% if suggestion.has_toilet %}Yes{% else %}No{%
+        endif %}<br />
+        <strong>Wifi:</strong> {% if suggestion.has_wifi %}Yes{% else %}No{%
+        endif %}<br />
+        <strong>Can Take Calls:</strong> {% if suggestion.can_take_calls %}Yes{%
+        else %}No{% endif %}<br />
+        <strong>Seats:</strong> {{ suggestion.seats or 'N/A' }}<br />
+        <strong>Coffee Price:</strong> {{ suggestion.coffee_price or 'N/A' }}
+      </p>
+
+      {% if suggestion.map_url %}
+      <p class="card-text">
+        <strong>Map URL:</strong>
+        <a href="{{ suggestion.map_url }}" target="_blank"
+          >{{ suggestion.map_url }}</a
+        >
+      </p>
+      {% endif %} {% if suggestion.img_url %}
+      <p class="card-text">
+        <strong>Image URL:</strong>
+        <a href="{{ suggestion.img_url }}" target="_blank"
+          >{{ suggestion.img_url }}</a
+        >
+      </p>
+      <img
+        src="{{ suggestion.img_url }}"
+        class="img-fluid rounded"
+        alt="{{ suggestion.name }} Image"
+        style="max-height: 300px"
+      />
+      {% endif %}
+
+      <div class="mt-3">
+        {% if session.get('is_admin') %} {# Admin-specific buttons #} {% if
+        suggestion.status == 'pending' %}
+        <a
+          href="{{ url_for('approve_suggestion', suggestion_id=suggestion.id) }}"
+          class="btn btn-success me-2"
+          >Approve</a
+        >
+        <a
+          href="{{ url_for('reject_suggestion', suggestion_id=suggestion.id) }}"
+          class="btn btn-danger me-2"
+          >Reject</a
+        >
+        {% endif %}
+        <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary"
+          >Back to Admin Dashboard</a
+        >
+        {% elif session.get('user_id') == suggestion.suggested_by_id %}
+        <a href="{{ url_for('user_dashboard') }}" class="btn btn-primary"
+          >Back to My Suggestions</a
+        >
+        {% else %}
+        <a href="{{ url_for('home') }}" class="btn btn-secondary"
+          >Back to Home</a
+        >
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,61 +1,37 @@
 {% extends "base.html" %} {% block content %}
-<div
-  class="container d-flex justify-content-center align-items-center"
-  style="min-height: 80vh"
->
-  <div class="w-100" style="max-width: 400px">
-    <!-- Flash Messages -->
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %}
-    <div class="mb-3">
-      {% for category, message in messages %}
-      <div
-        class="alert alert-{{ category }} alert-dismissible fade show"
-        role="alert"
-      >
-        {{ message }}
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="alert"
-          aria-label="Close"
-        ></button>
-      </div>
-      {% endfor %}
-    </div>
-    {% endif %} {% endwith %}
-    <div class="card shadow">
-      <div class="card-body">
-        <h2 class="card-title text-center mb-4">Login</h2>
-        <form method="POST" novalidate>
-          {{ form.hidden_tag() }}
-          <div class="mb-3">
-            {{ form.email.label(class="form-label") }} {{
-            form.email(class="form-control", placeholder="Enter your email") }}
-            {% for error in form.email.errors %}
-            <div class="text-danger small">{{ error }}</div>
-            {% endfor %}
-          </div>
-          <div class="mb-3">
-            {{ form.password.label(class="form-label") }} {{
-            form.password(class="form-control", placeholder="Enter your password") }} {% for error in form.password.errors %}
-            <div class="text-danger small">{{ error }}</div>
-            {% endfor %}
-          </div>
-          <div class="d-grid mb-3">
-            {{ form.submit(class="btn btn-warning btn-lg w-100 fw-bold shadow-sm
-            border-2 rounded-pill") }}
-          </div>
-        </form>
-        <p class="text-center mt-3 mb-0">
-          Don't have an account?
-          <a
-            href="{{ url_for('signup') }}"
-            class="text-decoration-none text-orange"
-            >Sign up here</a
-          >.
-        </p>
-      </div>
+<div class="container d-flex justify-content-center mt-5">
+  <div class="card shadow" style="width: 100%; max-width: 400px">
+    <div class="card-body">
+      <h2 class="card-title text-center mb-4">Login</h2>
+      <form method="POST" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="mb-3">
+          {{ form.email.label(class="form-label") }} {{
+          form.email(class="form-control", placeholder="Enter your email") }} {%
+          for error in form.email.errors %}
+          <div class="text-danger small">{{ error }}</div>
+          {% endfor %}
+        </div>
+        <div class="mb-3">
+          {{ form.password.label(class="form-label") }} {{
+          form.password(class="form-control", placeholder="Enter your password")
+          }} {% for error in form.password.errors %}
+          <div class="text-danger small">{{ error }}</div>
+          {% endfor %}
+        </div>
+        <div class="d-grid mb-3">
+          {{ form.submit(class="btn btn-warning btn-lg w-100 fw-bold shadow-sm
+          border-2 rounded-pill") }}
+        </div>
+      </form>
+      <p class="text-center mt-3 mb-0">
+        Don't have an account?
+        <a
+          href="{{ url_for('signup') }}"
+          class="text-decoration-none text-orange"
+          >Sign up here</a
+        >.
+      </p>
     </div>
   </div>
 </div>

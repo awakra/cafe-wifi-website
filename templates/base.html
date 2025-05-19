@@ -73,13 +73,35 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+              <a
+                class="nav-link btn btn-orange text-white ms-2 px-3"
+                href="{{ url_for('home') }}"
+                >Home</a
+              >
             </li>
+            {% if session.get('user_id') %}
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('add_cafe') }}">Add Cafe</a>
+              <a
+                class="nav-link btn btn-orange text-white ms-2 px-3"
+                href="{{ url_for('logout') }}"
+                >Logout</a
+              >
             </li>
+            {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="{{ url_for('signup') }}">Signup</a>
+              <a
+                class="nav-link btn btn-orange text-white ms-2 px-3"
+                href="{{ url_for('login') }}"
+                >Login</a
+              >
+            </li>
+            {% endif %}
+            <li class="nav-item">
+              <a
+                class="nav-link btn btn-orange text-white ms-2 px-3"
+                href="{{ url_for('signup') }}"
+                >Sign Up</a
+              >
             </li>
           </ul>
         </div>

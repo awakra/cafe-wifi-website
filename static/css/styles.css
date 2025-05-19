@@ -30,3 +30,10 @@
   object-fit: cover;
   height: 200px;
 }
+
+.btn-orange:hover,
+.btn-orange:focus {
+  background-color: #ff8800;
+  color: #fff;
+  text-decoration: none;
+}

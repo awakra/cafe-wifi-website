@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from functools import wraps # For the admin decorator
 import click # For the CLI command
 from flask.cli import with_appcontext # For the CLI command
+from flask_wtf.csrf import CSRFProtect # Import CSRFProtect
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cafes.db'
@@ -13,6 +14,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'your-secret-key' # IMPORTANT: Change this in production
 db.init_app(app)
 migrate = Migrate(app, db)
+csrf = CSRFProtect(app) # Initialize CSRFProtect
 
 @app.context_processor
 def inject_current_year():
